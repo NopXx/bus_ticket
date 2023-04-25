@@ -1,0 +1,58 @@
+CREATE TABLE `User` (
+  `user_id` INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `first_name` VARCHAR(50) NOT NULL,
+  `last_name` VARCHAR(50) NOT NULL,
+  `phone_number` VARCHAR(20) NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  `updated_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
+
+CREATE TABLE `Bus` (
+  `bus_id` INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `bus_name` VARCHAR(50) NOT NULL,
+  `bus_type` VARCHAR(50) NOT NULL,
+  `total_seats` INT(11) NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  `updated_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
+
+CREATE TABLE `Route` (
+  `route_id` INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `source` VARCHAR(50) NOT NULL,
+  `destination` VARCHAR(50) NOT NULL,
+  `distance` INT(11) NOT NULL,
+  `duration` TIME NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  `updated_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
+
+CREATE TABLE `Schedule` (
+  `schedule_id` INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `bus_id` INT(11) NOT NULL,
+  `route_id` INT(11) NOT NULL,
+  `departure_time` TIME NOT NULL,
+  `arrival_time` TIME NOT NULL,
+  `fare` FLOAT NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  `updated_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
+
+CREATE TABLE `Booking` (
+  `booking_id` INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `schedule_id` INT(11) NOT NULL,
+  `seat_number` INT(11) NOT NULL,
+  `status` VARCHAR(20) NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  `updated_at` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
+
+ALTER TABLE `Schedule` ADD FOREIGN KEY (`bus_id`) REFERENCES `Bus` (`bus_id`) ON DELETE CASCADE;
+
+ALTER TABLE `Schedule` ADD FOREIGN KEY (`route_id`) REFERENCES `Route` (`route_id`) ON DELETE CASCADE;
+
+ALTER TABLE `Booking` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE;
+
+ALTER TABLE `Booking` ADD FOREIGN KEY (`schedule_id`) REFERENCES `Schedule` (`schedule_id`) ON DELETE CASCADE;
