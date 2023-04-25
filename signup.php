@@ -59,9 +59,39 @@
                   </div>
                     <!-- php signup -->
                     <?php 
+                        $sub = '';
+                        require("db/conn.php");
+                        session_start();
+                        if(!empty($_SESSION)) {
+                            echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL=index.php">';
+                        }
                         
+                        if (!empty($_POST)) {
+                            $SQL = 'SELECT count(*) as num FROM user WHERE username LIKE "' . $_POST['username'] . '"';
+                            $result = mysqli_query($conn, $SQL);
+                            $data = mysqli_fetch_assoc($result);
+                            if ($data['num'] == 0) {
+                                $SQL = 'INSERT INTO user (first_name, last_name, username, password, phone_number) 
+                                        VALUES ("'.$_POST['first_name'].'","'.$_POST['last_name'].'","'.$_POST['username'].'","'.$_POST['password'].'","'.$_POST['phone_number'].'")';
+                                $result = mysqli_query($conn, $SQL);
+                                @session_start();
+                                $_SESSION['username'] = $_POST['username'];
+                                $_SESSION['first_name'] = $_POST['first_name'];
+                        
+                                echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL=index.php">';
+                            } else {
+                                $sub = '<div class="col-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <i class="bi bi-exclamation-octagon me-1"></i>
+                                                ไม่สามารถสมัครบัญชี กรุณาเปลี่ยนชื่อผู้ใช้!
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </div>';
+                            }
+                        }
                     ?>
                   <form class="row g-3 needs-validation" novalidate method="post">
+                    <?=$sub ?>
                     <div class="col-12">
                       <label for="yourName" class="form-label">ชื่อ</label>
                       <input type="text" name="first_name" class="form-control" id="yourName" required>
@@ -93,7 +123,7 @@
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">กรุณาป้อนรหัสผ่าน</div>
                     </div>
-
+                    
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">สมัครบัญชี</button>
                     </div>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+  <title>เข้าสู่ระบบ</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -64,8 +64,44 @@
                     <p class="text-center small">ป้อนชื่อผู้ใช้ และ รหัสผ่าน</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <?php
+                    $sub = '';
+                    require("db/conn.php");
+                    session_start();
+                    if(!empty($_SESSION)) {
+                        echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL=index.php">';
+                    }
 
+                    if (!empty($_POST)) {
+                        $SQL = 'SELECT count(*) as num FROM user WHERE username LIKE "' . $_POST['username'] . '" 
+                        AND password LIKE "' . $_POST['password'] . '" ';
+                        $result = mysqli_query($conn, $SQL);
+                        $data = mysqli_fetch_assoc($result);
+                        if ($data['num'] == 1) {
+                            $SQL = 'SELECT * FROM user WHERE username LIKE "' . $_POST['username'] . '" ';
+                            $result = mysqli_query($conn, $SQL);
+                            $data = mysqli_fetch_assoc($result);
+                            @session_start();
+                            @$_SESSION['id'] = $data['user_id'];
+                            @$_SESSION['username'] = $data['username'];
+                            @$_SESSION['first_name'] = $data['first_name'];
+
+                            echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL=index.php">';
+                        } else {
+                          $sub = '<div class="col-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <i class="bi bi-exclamation-octagon me-1"></i>
+                                                ไม่สามารถเข้าสู่ระบบได้ กรุณาลองอีกครั้ง
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </div>';
+                        }
+                    }
+
+                  ?>
+
+                  <form class="row g-3 needs-validation" novalidate method="post">
+                  <?=$sub ?>
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">ชื่อผุ้ใช้</label>
                       <div class="input-group has-validation">
