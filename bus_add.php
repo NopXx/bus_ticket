@@ -143,7 +143,7 @@ session_start();
                                 </div>
 
                             </form>
-                            <!-- End General Form Elements -->
+                            <!-- Form -->
 
                         </div>
                     </div>
