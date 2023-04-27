@@ -98,6 +98,9 @@ session_start();
                                                     แก้ไขข้อมูลสำเร็จ
                                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                 </div>';
+                                    $sql = 'SELECT * from bus where bus_id = ' . $_GET["bus_id"];
+                                    $result = mysqli_query($conn, $sql);
+                                    $data = mysqli_fetch_assoc($result);
                                 } else {
                                     $sql = 'SELECT count(*) AS num from bus where bus_name = "' . $_POST['bus_name'] . '"';
                                     $result = mysqli_query($conn, $sql);
@@ -111,6 +114,9 @@ session_start();
                                                     แก้ไขข้อมูลสำเร็จ
                                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                 </div>';
+                                        $sql = 'SELECT * from bus where bus_id = ' . $_GET["bus_id"];
+                                        $result = mysqli_query($conn, $sql);
+                                        $data = mysqli_fetch_assoc($result);
                                     } else {
                                         $sub = '<div class="col-12">
                                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
