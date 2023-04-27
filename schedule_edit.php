@@ -66,7 +66,7 @@ if (empty($_SESSION)) {
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">หน้าแรก</a></li>
-                    <li class="breadcrumb-item">จัดการ</li>
+                    <li class="breadcrumb-item">แก้ไข</li>
                     <li class="breadcrumb-item active">รอบรถ</li>
                 </ol>
             </nav>
@@ -94,7 +94,7 @@ if (empty($_SESSION)) {
                                 }
                             }
                             if (!empty($_POST)) {
-                                $sql_insert = 'UPDATE schedule SET bus_id = ' . $_POST['bus_id'] . ' , route_id = ' . $_POST['route_id'] . ', departure_date = "' . $_POST['departure_date'] . '", departure_time = "' . $_POST['departure_time'] . '" where schedule_id = ' . $_GET['schedule_id'];
+                                $sql_insert = 'UPDATE schedule SET bus_id = ' . $_POST['bus_id'] . ' , route_id = ' . $_POST['route_id'] . ', departure_date = "' . $_POST['departure_date'] . '", departure_time = "' . $_POST['departure_time'] . '", price = "'.$_POST['price'].'" where schedule_id = ' . $_GET['schedule_id'];
                                 // echo $sql_insert;
                                 $query = mysqli_query($conn, $sql_insert);
                                 $sub = '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -163,6 +163,14 @@ if (empty($_SESSION)) {
                                 </div>
 
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">ราคา</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" name="price" class="form-control" id="yourName" value="<?= $data['price']; ?>" required>
+                                        <div class="invalid-feedback">ป้อนราคา</div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label"></label>
                                     <div class="col-sm-10">
                                         <button type="submit" class="btn btn-primary">แก้ไข</button>
@@ -186,6 +194,7 @@ if (empty($_SESSION)) {
                                         <th scope="col">รถบัส</th>
                                         <th scope="col">ต้นทาง - ปลายทาง</th>
                                         <th scope="col">วันที่ - เวลา</th>
+                                        <th scope="col">ราคา</th>
                                         <th scope="col">ตัวเลือก</th>
                                     </tr>
                                 </thead>
@@ -204,6 +213,7 @@ if (empty($_SESSION)) {
                                             <td><?= $data['bus_name']; ?></td>
                                             <td><?= $data['source']; ?> - <?= $data['destination']; ?></td>
                                             <td><?= $data['departure_date']; ?> - <?= $data['departure_time']; ?></td>
+                                            <td><?= $data['price']; ?></td>
                                             <td>
                                                 <a href="schedule_edit.php?schedule_id=<?= $data['schedule_id']; ?>" title="แก้ไข" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
                                                 <a href="schedule_del.php?schedule_id=<?= $data['schedule_id']; ?>" onclick="return confirm('ต้องการลบข้อมูลนี้ ?')" title="ลบ" class="btn btn-danger"><i class="bi bi-trash"></i></a>
@@ -218,6 +228,7 @@ if (empty($_SESSION)) {
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     </main>
