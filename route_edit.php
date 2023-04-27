@@ -88,7 +88,7 @@ require("db/conn.php");
                 $data = mysqli_fetch_assoc($result);
             }
               if (!empty($_POST)) {
-                $sql_insert = 'UPDATE route SET source = "'.$_POST['source'].'", destination = "'.$_POST['destination'].'" where route_id = '.$_GET['route_id'];
+                $sql_insert = 'UPDATE route SET source = "'.$_POST['source'].'", destination = "'.$_POST['destination'].'", updated_at = now() where route_id = '.$_GET['route_id'];
                 // echo $sql_insert;
                 $query = mysqli_query($conn, $sql_insert);
                 $sub = '<div class="alert alert-success alert-dismissible fade show" role="alert">
