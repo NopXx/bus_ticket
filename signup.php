@@ -74,11 +74,8 @@
                                 $SQL = 'INSERT INTO user (first_name, last_name, username, password, phone_number) 
                                         VALUES ("'.$_POST['first_name'].'","'.$_POST['last_name'].'","'.$_POST['username'].'","'.$_POST['password'].'","'.$_POST['phone_number'].'")';
                                 $result = mysqli_query($conn, $SQL);
-                                @session_start();
-                                $_SESSION['username'] = $_POST['username'];
-                                $_SESSION['first_name'] = $_POST['first_name'];
                         
-                                echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL=index.php">';
+                                echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL=login.php">';
                             } else {
                                 $sub = '<div class="col-12">
                                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
