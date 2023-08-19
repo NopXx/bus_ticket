@@ -1,14 +1,14 @@
-<mxfile host="app.diagrams.net" modified="2023-08-19T17:12:40.756Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="pNpOaJyqIWPmjz_gE7g5" version="21.6.8" type="github">
+<mxfile host="app.diagrams.net" modified="2023-08-19T17:18:30.837Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="YGDemTcF8cz2c6hZr939" version="21.6.8" type="github">
   <diagram name="Page-1" id="Dknae987lEnLRzKgi6Qo">
     <mxGraphModel dx="1434" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="fq7sKHzNKrUJjAVNYg1c-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="170" y="230" width="120" height="60" as="geometry" />
+        <mxCell id="fq7sKHzNKrUJjAVNYg1c-3" value="Entity" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="170" y="230" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="fq7sKHzNKrUJjAVNYg1c-2" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="80" y="130" width="80" height="60" as="geometry" />
+        <mxCell id="fq7sKHzNKrUJjAVNYg1c-4" value="Attribute" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="50" y="140" width="100" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
